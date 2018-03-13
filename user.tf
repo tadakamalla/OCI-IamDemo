@@ -45,8 +45,7 @@ resource "oci_identity_user_group_membership" "t" {
             	group_id = "${oci_identity_group.t.id}"
 		}
 data "oci_identity_users" "test_users" {
-        compartment_id = "${var.compartment_ocid}"
-}
+       compartment_id = "${oci_identity_compartment.t.id}"
 output "Users" {
   sensitive = false
   value = ["${data.oci_identity_users.test_users.users}"]
