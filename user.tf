@@ -44,11 +44,11 @@ resource "oci_identity_user_group_membership" "t" {
             	user_id = "${oci_identity_user.u.id}"
             	group_id = "${oci_identity_group.t.id}"
 		}
-resource "oci_identity_ui_password" "tf_password" {
-  user_id = "${oci_identity_user.u.id}"
+data "oci_identity_users" "test_users" {
+        compartment_id = "${var.compartment_ocid}"
+}
+output "Users" {
+  sensitive = false
+  value = ["${data.oci_identity_users.test_users.users}"]
 }
 
-output "UserUIPassword" {
-  sensitive = false
-  value = ["${oci_identity_ui_password.tf_password.password}"]
-}
